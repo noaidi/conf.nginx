@@ -1,0 +1,18 @@
+location ~ \.(php|html)$ {
+	fastcgi_buffering off;
+	fastcgi_pass unix:/run/php/php7.4-fpm.sock;
+	fastcgi_index index.php;
+	fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+	include fastcgi_params;
+}
+
+location /.htaccess {
+	return 404;
+}
+
+location /xmlrpc.php {
+	deny all;
+}
+
+client_max_body_size 103M;
+

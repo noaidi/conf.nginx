@@ -1,0 +1,3 @@
+include /home/.settings/conf.nginx/html.nginx;
+include /home/.settings/conf.nginx/include/php.nginx;
+index index.html index.php;

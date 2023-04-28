@@ -1,0 +1,36 @@
+index index.php;
+
+location / {
+	if ($bad_bots) { return 444; }
+	try_files $uri $uri/ /index.php;
+	include /home/.settings/conf.nginx/include/ci-index.nginx;
+
+	expires 30d;
+	gzip on;
+	gzip_types *;
+}
+
+location /.htaccess {
+	return 404;
+}
+
+location ~ \.(scss|sass)$ {
+	return 404;
+}
+
+location ~ (?<!\.min)\.js$ {
+	return 404;
+}
+
+location ~ ^/(application|system)/ {
+	return 404;
+}
+
+location /xmlrpc.php {
+	deny all;
+}
+
+client_max_body_size 103M;
+
+
+error_page 404 /index.php;

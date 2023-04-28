@@ -1,0 +1,2 @@
+listen 80;
+include /home/.settings/conf.nginx/include/ci.nginx;

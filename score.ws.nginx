@@ -1,0 +1,4 @@
+include /home/.settings/conf.nginx/score.nginx;
+proxy_set_header Connection $http_connection;
+proxy_set_header Upgrade $http_upgrade;
+proxy_set_header Host $host;
