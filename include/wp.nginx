@@ -1,0 +1,42 @@
+index index.php index.html index.htm;
+
+location / {
+	if ($bad_bots) { return 444; }
+	try_files $uri $uri/ /index.php?$query_string;
+	autoindex off;
+
+	expires 30d;
+	gzip on;
+	gzip_types *;
+}
+
+location ~ \.php$ {
+	fastcgi_pass unix:/run/php/php8.2-fpm.sock;
+	fastcgi_split_path_info ^(.+\.php)(/.+)$;
+	fastcgi_index index.php;
+	fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+	include fastcgi_params;
+	fastcgi_read_timeout 300;
+	proxy_read_timeout 300;
+}
+
+location /.htaccess {
+	return 404;
+}
+
+# Hide all .php files to avoid direct access
+location ~* /(wp-content|wp-includes)/.+\.php$ {
+	deny all;
+}
+
+# Block access to specific files
+location ~* /(?:wp-config.php|readme.html|license.txt)$ {
+	deny all;
+}
+
+# Prevent direct access to .git and .svn
+location ~ /\. {
+	deny all;
+}
+
+client_max_body_size 103M;
