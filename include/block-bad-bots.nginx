@@ -1,5 +1,8 @@
 map $http_user_agent $bad_bots {
 	default                                  0;
+	~*meta-externalagent                     1;
+	~*Applebot                               1;
+	~*GPTBot                                 1;
 	~*360Spider                              1;
 	~*360Spider                              1;
 	~*80legs                                 1;
