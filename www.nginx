@@ -1,3 +1,4 @@
+limit_req_zone $binary_remote_addr zone=global:10m rate=10r/s;
 include /home/.settings/conf.nginx/include/block-bad-bots.nginx;
 
 # https

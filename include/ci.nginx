@@ -4,6 +4,7 @@ location / {
 	if ($bad_bots) { return 444; }
 	try_files $uri $uri/ /index.php;
 	include /home/.settings/conf.nginx/include/ci-index.nginx;
+	limit_req zone=global burst=20 nodelay;
 
 	expires 30d;
 	gzip on;
