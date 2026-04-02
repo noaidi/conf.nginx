@@ -4,8 +4,13 @@ location / {
 	if ($bad_bots) { return 444; }
 	try_files $uri $uri/ /index.php;
 	include /home/.settings/conf.nginx/include/ci-index.nginx;
-	limit_req zone=global burst=80 delay=10;
 	limit_req_status 429;
+
+	# with cloudfront
+	#limit_req zone=global burst=10 delay=5;
+
+	# without cloudfront
+	limit_req zone=global burst=80 delay=10;
 
 	expires 30d;
 	gzip on;
